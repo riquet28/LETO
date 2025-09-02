@@ -1,1 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>LETO – Navbar + Titre + Tableau</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Frank+Ruhl+Libre:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbar__inner">
+      <div class="brand">
+        <div class="logo"><span class="logo__name">SATEBA</span><span class="logo__equal">=</span></div>
+      </div>
+      <nav>
+        <ul class="nav">
+          <li><a class="nav__link" href="#">Commandes</a></li>
+          <li><a class="nav__link nav__link--active" href="#">Référentiels</a></li>
+          <li><a class="nav__link" href="#">Atelier</a></li>
+        </ul>
+      </nav>
+      <div class="right-info">
+        <div class="app-block">
+          <div class="app-name">LETO</div>
+          <div class="app-side">
+            <span class="version">v0.3.1</span>
+            <div class="lang">
+              <span class="lang__label">FR</span>
+              <svg class="flag" viewBox="0 0 3 2">
+                <rect width="1" height="2" x="0" y="0" fill="#002495"/>
+                <rect width="1" height="2" x="1" y="0" fill="#ffffff"/>
+                <rect width="1" height="2" x="2" y="0" fill="#ED2939"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Sous-nav -->
+    <nav class="subnav">
+      <ul class="subnav__inner">
+        <li><a class="subnav__link" href="#">Supports</a></li>
+        <li><a class="subnav__link subnav__link--active" href="#">Moules</a></li>
+        <li><a class="subnav__link" href="#">Moules en production</a></li>
+        <li><a class="subnav__link" href="#">Plaques</a></li>
+        <li><a class="subnav__link" href="#">Génératrices</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-head">
+      <div class="title-group">
+        <h1 class="page-title">Liste des moules</h1>
+        <span class="badge">312</span>
+      </div>
+      <button class="btn" title="Créer un nouveau moule">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.18"/><path d="M12 7v10M7 12h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Ajouter un moule
+      </button>
+    </div>
+
+    <section class="card">
+      <div class="table-wrap">
+        <table class="table" aria-label="Liste des moules">
+          <thead>
+            <tr>
+              <th style="width:80px">N°</th>
+              <th>Appellation</th>
+              <th>Type de moule</th>
+              <th>Longueur</th>
+              <th>Actif</th>
+              <th style="width:90px">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>312</td><td>MouleÉric1Modifié</td><td>3575#AVSUKR</td><td>5</td><td><input type="checkbox" checked disabled></td><td><span class="icon-pencil" title="Éditer"></span></td></tr>
+            <tr><td>311</td><td>AV Standard</td><td>3400#AVSTD</td><td>3400</td><td><input type="checkbox" checked disabled></td><td><span class="icon-pencil" title="Éditer"></span></td></tr>
+            <tr><td>310</td><td>AV Standard</td><td>2800#AVSTD</td><td>2800</td><td><input type="checkbox" checked disabled></td><td><span class="icon-pencil" title="Éditer"></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
 
