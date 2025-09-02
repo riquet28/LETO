@@ -1,0 +1,52 @@
+:root{
+  --peacock:#006679;
+  --safran:#F6BE00;
+  --blue-prestige:#004F71;
+  --border:#E2E8F0;
+  --text:#1F2937;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Barlow',sans-serif;color:var(--text)}
+header.navbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--border);width:100%}
+.navbar__inner{display:flex;align-items:center;justify-content:space-between;padding:14px 32px}
+.brand{display:flex;align-items:center;gap:16px;font-size:1.8rem}
+.logo{font-weight:900;letter-spacing:.3px;display:flex;align-items:baseline;gap:6px;font-size:2.2rem}
+.logo__name{color:var(--blue-prestige);line-height:1}
+.logo__equal{color:var(--safran);line-height:1}
+.nav{display:flex;gap:20px;list-style:none;margin-left:40px;align-items:baseline}
+.nav__link{display:inline-block;padding:10px 14px;text-decoration:none;border-radius:10px;color:#374151;font-weight:500;font-size:1rem;line-height:1;transition:background .2s ease,color .2s ease}
+.nav__link:hover{background:var(--peacock);color:#fff}
+.nav__link--active{background:var(--peacock);color:#fff;font-weight:600}
+.right-info{display:flex;align-items:center;gap:12px;margin-left:auto}
+.app-block{display:flex;align-items:flex-start;gap:6px}
+.app-name{font-weight:800;color:var(--blue-prestige);font-size:2rem;line-height:1}
+.app-side{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.version{font-size:0.9rem;color:#000;font-weight:600}
+.lang{display:flex;align-items:center;gap:6px;font-size:0.9rem;color:#374151;font-weight:600}
+.flag{width:24px;height:16px;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.subnav{border-top:1px solid var(--border);background:#fff}
+.subnav__inner{display:flex;gap:20px;list-style:none;margin:0;padding:10px 32px;align-items:baseline}
+.subnav__link{padding:6px 12px;border-radius:8px;text-decoration:none;color:#374151;font-weight:500;font-size:0.95rem;line-height:1;transition:background .2s ease,color .2s ease}
+.subnav__link:hover{background:var(--safran);color:#000}
+.subnav__link--active{background:var(--safran);color:#000;font-weight:600}
+main{padding:32px}
+.page-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-top:16px}
+.title-group{display:flex;align-items:center;gap:12px}
+.page-title{font-family:'Barlow',sans-serif;font-size:2rem;font-weight:700;display:flex;align-items:baseline;gap:12px;color:#1f3e4e}
+.badge{background:var(--safran);border-radius:999px;padding:2px 10px;font-size:1rem;font-weight:600;color:#000;line-height:1}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;font-weight:600;color:#fff;background:var(--peacock);border:none;cursor:pointer;transition:filter .2s ease, transform .04s ease;box-shadow:0 1px 2px rgba(0,0,0,.05), 0 8px 24px rgba(0,0,0,.06)}
+.btn:hover{filter:brightness(.96)}
+.btn svg{width:18px;height:18px;fill:currentColor}
+.card{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 1px 2px rgba(0,0,0,.04);margin-top:20px}
+.table-wrap{overflow:auto}
+table.table{width:100%;border-collapse:separate;border-spacing:0}
+.table thead th{position:sticky;top:0;background:#f9fafb;color:#4b5563;font-weight:600;text-align:left;padding:12px 16px;border-bottom:1px solid var(--border)}
+.table tbody td{padding:14px 16px;border-bottom:1px solid #eef2f7;white-space:nowrap}
+.table tbody tr:nth-child(even){background:#fafcff}
+.icon-pencil{display:inline-block;width:16px;height:16px;border:2px solid #334155;border-radius:2px;transform:skew(-12deg);position:relative;background:linear-gradient(90deg,transparent 60%,#334155 60%)}
+.icon-pencil::after{content:"";position:absolute;right:-4px;top:50%;width:4px;height:4px;background:#334155;transform:translateY(-50%) rotate(45deg)}
+.pager{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px}
+.pager__info{font-size:0.9rem;color:#4b5563}
+.pager__buttons{display:flex;gap:8px}
+.btn--secondary{background:#fff;color:#374151;border:1px solid var(--border);padding:6px 10px;border-radius:8px}
+.btn--secondary[disabled]{opacity:.5;cursor:not-allowed}
