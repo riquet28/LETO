@@ -80,15 +80,104 @@
   </style>
 </head>
 <body>
-  <header class="navbar">…</header>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar__inner">
+      <div class="brand">
+        <div class="logo"><span class="logo__name">SATEBA</span><span class="logo__equal">=</span></div>
+      </div>
+      <nav>
+        <ul class="nav">
+          <li><a class="nav__link nav__link--active" href="#">Commandes</a></li>
+          <li><a class="nav__link" href="#">Référentiels</a></li>
+          <li><a class="nav__link" href="#">Atelier</a></li>
+        </ul>
+      </nav>
+      <div class="right-info">
+        <div class="app-block">
+          <div class="app-name">LETO</div>
+          <div class="app-side">
+            <span class="version">v0.3.1</span>
+            <div class="lang">
+              <span class="lang__label">FR</span>
+              <svg class="flag" viewBox="0 0 3 2">
+                <rect width="1" height="2" x="0" y="0" fill="#002495"/>
+                <rect width="1" height="2" x="1" y="0" fill="#ffffff"/>
+                <rect width="1" height="2" x="2" y="0" fill="#ED2939"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
+  <!-- EN-TÊTE + ACTIONS -->
   <main>
-    <div class="page-head">…</div>
+    <div class="page-head">
+      <div class="title-group">
+        <h1 class="page-title">Liste des listings</h1>
+        <span class="badge">981</span>
+      </div>
+      <div style="display:flex; gap:12px;">
+        <button class="btn" title="Créer un listing">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.18"/><path d="M12 7v10M7 12h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Créer un listing
+        </button>
+        <button class="btn" title="Créer une commande">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="currentColor" opacity="0.18"/><path d="M12 7v10M7 12h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Créer une commande
+        </button>
+      </div>
+    </div>
 
-    <!-- Filtres -->
-    <div class="filters" role="region" aria-label="Filtres listings">…</div>
+    <!-- FILTRES -->
+    <div class="filters" role="region" aria-label="Filtres listings">
+      <div class="filters__row">
+        <div class="field" style="grid-column: span 1">
+          <label for="f-du">Du</label>
+          <input type="date" id="f-du" value="2023-06-01">
+        </div>
+        <div class="field" style="grid-column: span 1">
+          <label for="f-au">Au</label>
+          <input type="date" id="f-au" value="2023-12-31">
+        </div>
+        <div class="field" style="grid-column: span 2">
+          <label for="f-client">Client</label>
+          <select id="f-client">
+            <option value="">Tous</option>
+            <option>VOSSLOH COGIFER - cédé</option>
+          </select>
+        </div>
+        <div class="field" style="grid-column: span 2">
+          <label for="f-projet">Projet</label>
+          <select id="f-projet">
+            <option value="">Tous</option>
+            <option>23.020</option>
+            <option>23.022</option>
+            <option>145184</option>
+            <option>146740</option>
+            <option>147933</option>
+          </select>
+        </div>
+        <div class="field" style="grid-column: span 2">
+          <label for="f-commande">Commande</label>
+          <select id="f-commande">
+            <option value="">Toutes</option>
+            <option>PN-2024-046</option>
+            <option>PN-2024-047</option>
+            <option>PN-2024-048</option>
+            <option>AV30 P460146</option>
+          </select>
+        </div>
+        <div class="field" style="grid-column: span 4">
+          <label for="f-search">Recherche</label>
+          <input id="f-search" type="search" placeholder="N° listing, client, appareil…">
+        </div>
+      </div>
+    </div>
 
-    <!-- Tableau -->
+    <!-- TABLEAU (sans checkbox par ligne, “Sim.”, sans “Prix (ml)”) -->
     <section class="card">
       <div class="table-wrap">
         <table class="table" aria-label="Liste des listings">
@@ -118,7 +207,7 @@
         </table>
       </div>
 
-      <!-- Pagination -->
+      <!-- PAGINATION -->
       <div class="pager">
         <div class="pager__info">Page 1/2 — 9 affichés</div>
         <div class="pager__buttons">
