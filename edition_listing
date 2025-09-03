@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LETO – Édition du listing (Navbar)</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --peacock:#006679;   /* Bleu paon Sateba */
+      --safran:#F6BE00;    /* Jaune Sateba */
+      --blue-prestige:#004F71;
+      --border:#E2E8F0;
+      --text:#1F2937;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:"Barlow",sans-serif;color:var(--text);background:#fff}
+
+    /* NAVBAR */
+    header.navbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--border)}
+    .navbar__inner{display:flex;align-items:center;justify-content:space-between;padding:14px 32px}
+    .logo{display:flex;align-items:baseline;gap:6px;font-weight:900;font-size:2.2rem;letter-spacing:.2px}
+    .logo__name{color:var(--blue-prestige)}
+    .logo__equal{color:var(--safran)}
+
+    nav{flex:1}
+    .nav{display:flex;gap:20px;list-style:none;margin-left:40px;align-items:baseline}
+    .nav__link{display:inline-block;padding:10px 14px;border-radius:10px;text-decoration:none;color:#374151;font-weight:600;transition:background .2s ease,color .2s ease}
+    .nav__link:hover{background:var(--peacock);color:#fff}
+    .nav__link--active{background:var(--peacock);color:#fff}
+
+    .right-info{display:flex;align-items:center;gap:12px;margin-left:auto}
+    .app-block{display:flex;align-items:flex-start;gap:6px}
+    .app-name{font-weight:800;color:var(--blue-prestige);font-size:2rem;line-height:1}
+    .app-side{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+    .version{font-weight:700;font-size:.95rem;color:#000}
+    .lang{display:flex;align-items:center;gap:6px;font-weight:700;color:#374151}
+    .flag{width:24px;height:16px;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+
+    /* En-tête & collapse */
+    .head{margin:24px 32px 0}
+    .head__bar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .head__title{font-size:2rem;font-weight:700;line-height:1;color:#1f3e4e}
+    .head__id{color:var(--peacock)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;font-weight:600;color:#fff;background:var(--peacock);border:none;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.05), 0 8px 24px rgba(0,0,0,.06)}
+    .btn:hover{filter:brightness(.96)}
+    .btn svg{width:18px;height:18px;fill:currentColor}
+    .btn-toggle .icon{transition:transform .18s ease}
+    .fields{margin-top:16px;border:1px solid var(--border);border-radius:14px;padding:16px}
+    .grid{display:grid;grid-template-columns:repeat(5, minmax(180px, 1fr));gap:14px}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field label{font-size:.9rem;color:#374151;font-weight:600}
+    .field input, .field select, .field textarea{appearance:none;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font:inherit;resize:vertical;line-height:1.35}
+    .field input:focus, .field select:focus, .field textarea:focus{outline:2px solid transparent;box-shadow:0 0 0 3px rgba(0,102,121,.15);border-color:var(--peacock)}
+    .readonly-field{padding:10px 12px;border:1px solid transparent;border-radius:10px;background:#f9fafb;color:#374151}
+    @media (max-width:1200px){.grid{grid-template-columns:repeat(3, minmax(180px,1fr))}}
+    @media (max-width:800px){.grid{grid-template-columns:repeat(2, minmax(160px,1fr))}}
+
+    /* Corps */
+    .body{margin:32px}
+    .body__bar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
+    .body__title{font-size:2rem;font-weight:700;color:#1f3e4e}
+    .body__actions{display:flex;gap:10px}
+    .icon-btn{background:#fff;border:1px solid var(--border);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:1.1rem}
+    .icon-btn:hover{background:#f9fafb}
+    .table-wrap{max-height:60vh;overflow:auto;border:1px solid var(--border);border-radius:12px}
+    .table{width:100%;border-collapse:separate;border-spacing:0}
+    .table th,.table td{padding:12px 14px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+    .table thead th{position:sticky;top:0;background:#f9fafb;font-weight:600;color:#374151;z-index:1}
+    /* Actions cliquables */
+    td.actions{white-space:nowrap}
+    .action-btn{display:inline-flex;align-items:center;justify-content:center;gap:4px;margin-inline:4px;padding:4px 6px;border-radius:6px;border:1px solid transparent;cursor:pointer;user-select:none}
+    .action-btn:hover{background:#f3f4f6;border-color:#e5e7eb}
+    .action-transfer{color:var(--peacock)}
+    .action-delete{color:#7a1f1f}
+    /* Pagination */
+    .pager{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;background:#fff}
+    .pager__info{font-size:.95rem;color:#4b5563}
+    .pager__buttons{display:flex;gap:8px}
+    .btn--secondary{background:#fff;color:#374151;border:1px solid var(--border);padding:8px 12px;border-radius:10px;cursor:pointer}
+    .btn--secondary[disabled]{opacity:.5;cursor:not-allowed}
+    /* Actions cliquables */
+    td.actions{white-space:nowrap}
+    .action-btn{display:inline-flex;align-items:center;justify-content:center;gap:4px;margin-inline:4px;padding:4px 6px;border-radius:6px;border:1px solid transparent;cursor:pointer;user-select:none}
+    .action-btn:hover{background:#f3f4f6;border-color:#e5e7eb}
+    .action-transfer{color:var(--peacock)}
+    .action-delete{color:#7a1f1f}
+  </style>
+</head>
+<body>
+  <!-- NAVBAR seule (onglet Commandes actif) -->
+  <header class="navbar">
+    <div class="navbar__inner">
+      <div class="logo">
+        <span class="logo__name">SATEBA</span><span class="logo__equal">=</span>
+      </div>
+      <nav>
+        <ul class="nav">
+          <li><a class="nav__link nav__link--active" href="#">Commandes</a></li>
+          <li><a class="nav__link" href="#">Référentiels</a></li>
+          <li><a class="nav__link" href="#">Atelier</a></li>
+        </ul>
+      </nav>
+      <div class="right-info">
+        <div class="app-block">
+          <div class="app-name">LETO</div>
+          <div class="app-side">
+            <span class="version">v0.3.1</span>
+            <div class="lang">
+              <span>FR</span>
+              <svg class="flag" viewBox="0 0 3 2" aria-hidden="true">
+                <rect width="1" height="2" x="0" y="0" fill="#002495"/>
+                <rect width="1" height="2" x="1" y="0" fill="#ffffff"/>
+                <rect width="1" height="2" x="2" y="0" fill="#ED2939"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- zone de travail: l'entête et le corps viendront ensuite -->
+  <main>
+    <!-- En-tête : Titre + collapse -->
+    <section class="head">
+      <div class="head__bar">
+        <h1 class="head__title">Édition du listing <span class="head__id">3</span></h1>
+        <button id="toggle-head" class="btn btn-toggle" aria-expanded="true" aria-controls="head-fields" title="Replier / Déplier">
+          <span class="icon">▾</span>
+          <span class="label">Replier</span>
+        </button>
+      </div>
+
+      <!-- Champ / formulaire d'entête -->
+      <div id="head-fields" class="fields">
+        <div class="grid">
+          <div class="field">
+            <label for="appareil">Nom d'appareil*</label>
+            <input id="appareil" type="text" placeholder="AV10-402" />
+          </div>
+          <div class="field">
+            <label for="delai">Délai*</label>
+            <input id="delai" type="date" />
+          </div>
+          <div class="field">
+            <label>Client*</label>
+            <div class="readonly-field">VOSSLOH COGIFER - cédé</div>
+          </div>
+          <div class="field">
+            <label>N° de commande*</label>
+            <div class="readonly-field">145654</div>
+          </div>
+          <div class="field">
+            <label>Code Projet*</label>
+            <div class="readonly-field">GDP EXP AV</div>
+          </div>
+
+          <div class="field">
+            <label for="tangente">Tangente*</label>
+            <input id="tangente" type="text" placeholder="Tangente" />
+          </div>
+          <div class="field">
+            <label for="aiguille">Aiguille</label>
+            <input id="aiguille" type="text" placeholder="Aiguille" />
+          </div>
+          <div class="field">
+            <label for="entraxe">Entraxe</label>
+            <input id="entraxe" type="text" placeholder="Entraxe" />
+          </div>
+          <div class="field">
+            <label for="detailFab">Détail fabrication</label>
+            <input id="detailFab" type="text" placeholder="Détail fabrication" />
+          </div>
+          <div class="field">
+            <label for="gaine">Gaine</label>
+            <input id="gaine" type="text" placeholder="Gaine" />
+          </div>
+
+          <div class="field">
+            <label for="plan">Plan client</label>
+            <input id="plan" type="text" placeholder="Plan client" />
+          </div>
+          <div class="field">
+            <label for="repere">Repère</label>
+            <input id="repere" type="text" placeholder="Repère" />
+          </div>
+          <div class="field" style="grid-column: span 2;">
+            <label for="poste">Poste complément information</label>
+            <input id="poste" type="text" placeholder="Poste complément information" />
+          </div>
+          <div class="field">
+            <label for="logo">Logo</label>
+            <input id="logo" type="text" placeholder="Logo" />
+          </div>
+          <div class="field" style="grid-column: 1 / -1;">
+            <label for="obs">Observation(s)</label>
+            <textarea id="obs" rows="2" placeholder="Observation(s)"></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Corps / supports -->
+    <section class="body">
+      <div class="body__bar">
+        <h2 class="body__title">Composition / Supports</h2>
+        <div class="body__actions">
+          <button class="icon-btn" title="Pièces jointes">📎</button>
+          <button class="icon-btn" title="Uploader">⤴️</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Modèle</th>
+              <th>Support</th>
+              <th>Longueur</th>
+              <th>Type</th>
+              <th>Date de fab</th>
+              <th>A fab</th>
+              <th>Urgence</th>
+              <th>Dev</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>M2020</td><td>7 7D R</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2020</td><td>8 8D R</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2020</td><td>9 9D R</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2020</td><td>10 10D R</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2020</td><td>11 11D R</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2020</td><td>12 12D R</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2020</td><td>13 13D R</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2020</td><td>14 14D R</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2020</td><td>21 21D</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2020</td><td>22 22D</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2020</td><td>23 23D</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2020</td><td>24 24D</td><td>2800</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2020</td><td>23 23G</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>G</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2020</td><td>24 24G</td><td>2800</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>G</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2020</td><td>7 7G R</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>G</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2020</td><td>8 8G R</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>G</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2019</td><td>1000 2600E</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>-</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2019</td><td>20 20D R</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2019</td><td>28 28D R</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2019</td><td>22 22D R</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2019</td><td>23 23D R</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+            <tr><td>M2019</td><td>24 24D R</td><td>2600</td><td>Classique</td><td class="date-cell">-</td><td class="chk"><input type="checkbox"></td><td class="chk"><input type="checkbox"></td><td>D</td><td class="actions"><span class="action-btn action-transfer" role="button" tabindex="0" title="Transférer">➜</span><span class="action-btn action-delete" role="button" tabindex="0" title="Supprimer">🗑️</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Pagination -->
+      <div class="pager">
+        <div id="pg-info" class="pager__info">Page 1/1 — 0 ligne</div>
+        <div class="pager__buttons">
+          <button id="pg-prev" class="btn--secondary" disabled>Précédent</button>
+          <button id="pg-next" class="btn--secondary" disabled>Suivant</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const btn = document.getElementById('toggle-head');
+    const panel = document.getElementById('head-fields');
+    function setState(expanded){
+      btn.setAttribute('aria-expanded', expanded);
+      btn.querySelector('.label').textContent = expanded ? 'Replier' : 'Déplier';
+      btn.querySelector('.icon').style.transform = expanded ? 'rotate(0deg)' : 'rotate(-90deg)';
+      panel.style.display = expanded ? 'block' : 'none';
+    }
+    btn?.addEventListener('click', ()=>{
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      setState(!expanded);
+    });
+    // état initial
+    setState(true);
+
+    // Randomize quelques dates + cases à cocher
+    (function(){
+      const rows = document.querySelectorAll('.body .table tbody tr');
+      const today = new Date();
+      function fmt(d){const dd=('0'+d.getDate()).slice(-2);const mm=('0'+(d.getMonth()+1)).slice(-2);const yy=d.getFullYear();return `${dd}-${mm}-${yy}`}
+      rows.forEach(()=>{}); // ensure NodeList stable
+      rows.forEach((tr)=>{
+        if(Math.random() < 0.35){
+          const d = new Date(today.getTime() - Math.floor(Math.random()*10)*86400000);
+          const dc = tr.querySelector('.date-cell'); if(dc) dc.textContent = fmt(d);
+        }
+        const checks = tr.querySelectorAll('.chk input[type="checkbox"]');
+        if(checks[0] && Math.random() < 0.25) checks[0].checked = true; // A fab
+        if(checks[1] && Math.random() < 0.20) checks[1].checked = true; // Urgence
+      });
+    })();
+
+    // Pagination simple
+    (function(){
+      const tbody = document.querySelector('.body .table tbody');
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const info = document.getElementById('pg-info');
+      const prev = document.getElementById('pg-prev');
+      const next = document.getElementById('pg-next');
+      const pageSize = 10;
+      let page = 1;
+      const pageCount = Math.max(1, Math.ceil(rows.length / pageSize));
+
+      function render(){
+        rows.forEach((tr,i)=>{
+          const start=(page-1)*pageSize, end=start+pageSize;
+          tr.style.display = (i>=start && i<end) ? '' : 'none';
+        });
+        info.textContent = `Page ${page}/${pageCount} — ${rows.length} lignes`;
+        prev.disabled = (page===1);
+        next.disabled = (page===pageCount);
+      }
+      prev.addEventListener('click', ()=>{ if(page>1){ page--; render(); } });
+      next.addEventListener('click', ()=>{ if(page<pageCount){ page++; render(); } });
+      render();
+    })();
+  </script>
+</body>
+</html>
