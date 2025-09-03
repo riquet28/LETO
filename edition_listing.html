@@ -19,6 +19,8 @@
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:"Barlow",sans-serif;color:var(--text);background:#fff}
 
+
+    
     /* NAVBAR */
     header.navbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--border)}
     .navbar__inner{display:flex;align-items:center;justify-content:space-between;padding:14px 32px}
@@ -88,6 +90,17 @@
     .action-btn:hover{background:#f3f4f6;border-color:#e5e7eb}
     .action-transfer{color:var(--peacock)}
     .action-delete{color:#7a1f1f}
+    /* Titres unifiés (même rendu que le reste du projet) */
+    .head__title,
+    .body__title {
+      font-family: "Barlow", sans-serif !important;
+      font-weight: 600 !important;   /* si c’est encore trop gras, mets 500 */
+      font-size: 2rem;
+      line-height: 1.2;
+      color: #1f3e4e !important;
+      letter-spacing: .2px;
+    }
+
   </style>
 </head>
 <body>
